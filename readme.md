@@ -5,8 +5,8 @@ If you use this template for research, please [cite it](template_reference.bib):
 
 ## Contributors
 
-- First Name Last Name\*, email address, @githubname, ORCID link, affiliated institution(s)
-- First Name Last Name, email address, @githubname, ORCID link, affiliated institution(s)
+- Colman Bashore\*, cbashore@middlebury.edu, @colman-bashore, Middlebury College
+
 
 \* Corresponding author and creator
 
