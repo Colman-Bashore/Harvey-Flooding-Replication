@@ -2,47 +2,39 @@
 
 ### Authors
 
-- First Name Last Name\*, email address, @githubname, ORCID link, affiliated institution(s)
-- First Name Last Name, email address, @githubname, ORCID link, affiliated institution(s)
+- Colman Bashore\*, cbashore@middlebury.edu, GitHub: @colman-bashore, Department of Geography, Middlebury College
 
 \* Corresponding author and creator
 
 ### Abstract
 
-Write a brief abstract about your research project.
+This study is a reproduction of a Middebury Geography Indroductory GIS Lab problem titled "Exposure to Environmental Hazards: Hurricane Harvey." The original study focused on comparing levels of flooding across block groups of different majority demographics. The original study used the desktop GIS QGIS to determine the majority racial group in every block group in Harris County, Texas and then compared these data to the extent of flooding from Hurricane Harvey. This reproduction study aims to reproduce the same results from the original lab problem using a Python computation notebook (ipynb) as opposed to a desktop GIS workflow. The notebook will potentially serve as an opportunity to demonstrate using Python to complete simple GIS problems in the context of an introductory Human Geography with GIS class. 
 
-If the project is a reproduction or replication study, include a declaration of the study type with a full reference to the original study.
-For example:
-
-This study is a *replication* of:
-
-> citation to prior study
-
-A graphical abstract of the study could also be included as an image here.
+[Link to original study prompt](https://drive.google.com/file/d/1l_bylAyBrcuvR5PYj_I3jSKbu04dz5Wh/view)
 
 ### Study metadata
 
 - `Key words`: Comma-separated list of keywords (tags) for searchability. Geographers often use one or two keywords each for: theory, geographic context, and methods.
 - `Subject`: select from the [BePress Taxonomy](http://digitalcommons.bepress.com/cgi/viewcontent.cgi?article=1008&context=reference)
-- `Date created`: date when project was started
-- `Date modified`: date of most recent revision
-- `Spatial Coverage`: Specify the geographic extent of your study. This may be a place name and link to a feature in a gazetteer like GeoNames or OpenStreetMap, or a well known text (WKT) representation of a bounding box.
-- `Spatial Resolution`: Specify the spatial resolution as a scale factor, description of the level of detail of each unit of observation (including administrative level of administrative areas), and/or or distance of a raster GRID size
-- `Spatial Reference System`: Specify the geographic or projected coordinate system for the study, e.g. EPSG:4326
-- `Temporal Coverage`: Specify the temporal extent of your study---i.e. the range of time represented by the data observations.
-- `Temporal Resolution`: Specify the temporal resolution of your study---i.e. the duration of time for which each observation represents or the revisit period for repeated observations
-- `Funding Name`: name of funding for the project
-- `Funding Title`: title of project grant
-- `Award info URI`: web address for award information
-- `Award number`: award number
+- `Date created`: November 23, 2023
+- `Date modified`: December 17, 2023
+- `Spatial Coverage`: Harris County, Texas [OpenStreetMap Link](https://www.openstreetmap.org/relation/1560395)
+- `Spatial Resolution`: Census Block Group Level
+- `Spatial Reference System`: EPSG:4326
+- `Temporal Coverage`: September 2017
+- `Temporal Resolution`: Yearly Census Data
+- `Funding Name`: Middlebury College
+- `Funding Title`: N/A
+- `Award info URI`: N/A
+- `Award number`: N/A
 
 #### Original study spatio-temporal metadata
 
-- `Spatial Coverage`: extent of original study
-- `Spatial Resolution`: resolution of original study
-- `Spatial Reference System`: spatial reference system of original study
-- `Temporal Coverage`: temporal extent of original study
-- `Temporal Resolution`: temporal resolution of original study
+- `Spatial Coverage`: Harris County, Texas [OpenStreetMap Link](https://www.openstreetmap.org/relation/1560395)
+- `Spatial Resolution`: Census Block Group Level
+- `Spatial Reference System`: EPSG:4326
+- `Temporal Coverage`: September 2017
+- `Temporal Resolution`: Yearly Census Data
 
 ## Study design
 
@@ -56,8 +48,7 @@ Enumerate specific **hypotheses** to be tested or **research questions** to be i
 
 ### Computational environment
 
-Define the hardware, operating system, and software requirements for the research.
-Include citations to important software projects, plugins or packages and their versions.
+While the original study exlusively used QGIS this reproduction will use a Python computational notebook (ipynb).
 
 ### Data and variables
 
@@ -68,101 +59,52 @@ For secondary data sources with numerous variables, the analysis plan authors ma
 Primary data sources for the study are to include ... .
 Secondary data sources for the study are to include ... .
 
+blockgroups.shp
+◦ Block Groups of Harris County, Texas
+◦ One block group contains only 9 people, but you may include all block groups in your analysis.
+◦ Source: United States Census API https://www.census.gov/developers/ via R tidycensus
+https://walkerke.github.io/tidycensus
+
+blockgroup_demographic_data.csv
+◦ Data table of block group demographics.
+◦ Explanation of attribute variable codes from this 5-year American Community Survey 2012-2017 data are found in
+block group metadata.xls
+◦ Source: United States Census API https://www.census.gov/developers/ via Rtidycensus
+https://walkerke.github.io/tidycensus
+
+predicted_flood.shp
+◦ This vector layer contains FEMA’s 100-yr flood zones for Harris County. A 100-year flood zone indicates a 1%
+chance of flooding every year.
+◦ Source: FEMA’s National Flood Hazard Layer (NFHL) Viewer https://hazards-
+fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd
+
+actual_flood.shp
+◦ This vector layer contains FEMA’s 100-yr flood zones for Harris County. A 100-year flood zone indicates a 1%
+chance of flooding every year.
+◦ Source: FEMA’s National Flood Hazard Layer (NFHL) Viewer https://hazards-
+fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd
+
+actual_flood_10.tif
+◦ This raster layer contains the value 1 in each cell that was flooded and nodata (raster equivalent of
+NULL) in all other locations.
+◦ The layer's coordinate system units are meters, and the cell size is 10 meters by 10 meters.
+◦ Sources: The Flood Observatory https://floodobservatory.colorado.edu/ and the Harris County Flood
+Control District: https://www.hcfcd.org/Hurricane-Harvey
+
+
 Each of the next subsections describes one data source.
-
-#### Primary data source1 name
-
-**Standard Metadata**
-
-- `Abstract`: Brief description of the data source
-- `Spatial Coverage`: Specify the geographic extent of your study. This may be a place name and link to a feature in a gazetteer like GeoNames or OpenStreetMap, or a well known text (WKT) representation of a bounding box.
-- `Spatial Resolution`: Specify the spatial resolution as a scale factor, description of the level of detail of each unit of observation (including administrative level of administrative areas), and/or or distance of a raster GRID size
-- `Spatial Reference System`: Specify the geographic or projected coordinate system for the study
-- `Temporal Coverage`: Specify the temporal extent of your study---i.e. the range of time represented by the data observations.
-- `Temporal Resolution`: Specify the temporal resolution of your study---i.e. the duration of time for which each observation represents or the revisit period for repeated observations
-- `Lineage`: Describe and/or cite data sources and/or methodological steps planned to create this data source.
-  - sampling scheme, including spatial sampling
-  - target sample size and method for determining sample size
-  - stopping criteria for data collection and sampling (e.g. sample size, time elapsed)
-  - de-identification / anonymization
-  - experimental manipulation
-- `Distribution`: Describe who will make the data available and how?
-- `Constraints`: Legal constraints for *access* or *use* to protect *privacy* or *intellectual property rights*
-- `Data Quality`: State any planned quality assessment
-- `Variables`: For each variable, enter the following information. If you have two or more variables per data source, you may want to present this information in table form (shown below)
-  - `Label`: variable name as used in the data or code
-  - `Alias`: intuitive natural language name
-  - `Definition`: Short description or definition of the variable. Include measurement units in description.
-  - `Type`: data type, e.g. character string, integer, real
-  - `Accuracy`: e.g. uncertainty of measurements
-  - `Domain`: Expected range of Maximum and Minimum of numerical data, or codes or categories of nominal data, or reference to a standard codebook
-  - `Missing Data Value(s)`: Values used to represent missing data and frequency of missing data observations
-  - `Missing Data Frequency`: Frequency of missing data observations: not yet known for data to be collected
-
-| Label | Alias | Definition | Type | Accuracy | Domain | Missing Data Value(s) | Missing Data Frequency |
-| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
-| variable1 | ... | ... | ... | ... | ... | ... | ... |
-| variable2 | ... | ... | ... | ... | ... | ... | ... |
-
-#### Primary data source2 name
-
-... same form as above...
-
-#### Secondary data source1 name
-
-**Standard Metadata**
-
-- `Abstract`: Brief description of the data source
-- `Spatial Coverage`: Specify the geographic extent of your study. This may be a place name and link to a feature in a gazetteer like GeoNames or OpenStreetMap, or a well known text (WKT) representation of a bounding box.
-- `Spatial Resolution`: Specify the spatial resolution as a scale factor, description of the level of detail of each unit of observation (including administrative level of administrative areas), and/or or distance of a raster GRID size
-- `Spatial Reference System`: Specify the geographic or projected coordinate system for the study
-- `Temporal Coverage`: Specify the temporal extent of your study---i.e. the range of time represented by the data observations.
-- `Temporal Resolution`: Specify the temporal resolution of your study---i.e. the duration of time for which each observation represents or the revisit period for repeated observations
-- `Lineage`: Describe and/or cite data sources and/or methodological steps used to create this data source
-- `Distribution`: Describe how the data is distributed, including any persistent identifier (e.g. DOI) or URL for data access
-- `Constraints`: Legal constraints for *access* or *use* to protect *privacy* or *intellectual property rights*
-- `Data Quality`: State result of quality assessment or state "Quality unknown"
-- `Variables`: For each variable, enter the following information. If you have two or more variables per data source, you may want to present this information in table form (shown below)
-  - `Label`: variable name as used in the data or code
-  - `Alias`: intuitive natural language name
-  - `Definition`: Short description or definition of the variable. Include measurement units in description.
-  - `Type`: data type, e.g. character string, integer, real
-  - `Accuracy`: e.g. uncertainty of measurements
-  - `Domain`: Range (Maximum and Minimum) of numerical data, or codes or categories of nominal data, or reference to a standard codebook
-  - `Missing Data Value(s)`: Values used to represent missing data and frequency of missing data observations
-  - `Missing Data Frequency`: Frequency of missing data observations
-
-| Label | Alias | Definition | Type | Accuracy | Domain | Missing Data Value(s) | Missing Data Frequency |
-| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
-| variable1 | ... | ... | ... | ... | ... | ... | ... |
-| variable2 | ... | ... | ... | ... | ... | ... | ... |
-
-#### Secondary data source2 name
-
-... same form as above...
 
 ### Prior observations  
 
-Prior experience with the study area, prior data collection, or prior observation of the data can compromise the validity of a study, e.g. through p-hacking.
-Therefore, disclose any prior experience or observations at the time of study pre-registration here, with example text below:
-
-At the time of this study pre-registration, the authors had _____ prior knowledge of the geography of the study region with regards to the ____ phenomena to be studied.
-This study is related to ____ prior studies by the authors
-
-For each primary data source, declare the extent to which authors had already engaged with the data:
-
-- [ ] no data collection has started
-- [ ] pilot test data has been collected
-- [ ] data collection is in progress and data has not been observed
-- [ ] data collection is in progress and __% of data has been observed
-- [ ] data collection is complete and data has been observed. Explain how authors have already manipulated / explored the data.
+At the time of this study pre-registration, the authors had completed the original lab problem focusing on the Hurricane Harvey flooding using qgis.
+This study is related to no prior studies by the authors
 
 For each secondary source, declare the extent to which authors had already engaged with the data:
 
 - [ ] data is not available yet
 - [ ] data is available, but only metadata has been observed
 - [ ] metadata and descriptive statistics have been observed
-- [ ] metadata and a pilot test subset or sample of the full dataset have been observed
+- [x] metadata and a pilot test subset or sample of the full dataset have been observed
 - [ ] the full dataset has been observed. Explain how authors have already manipulated / explored the data.
 
 If pilot test data has been collected or acquired, describe how the researchers observed and analyzed the pilot test, and the extent to which the pilot test influenced the research design.
@@ -185,6 +127,8 @@ These include:
   - ecological fallacy
   - uncertainty e.g. from spatial disaggregation, anonymization, differential privacy
 
+One of the main geographic threat to validity in this study is the modifiable areal unit problem. In the case of the original study the data sources are aggregated at the level of census block groups. In many cases the unit of aggregation used for a study can dramatically change the output of an analysis. For example, the map of majority racial groups in Harris County aggregated at the block group level would be much more complex than a map at the tract level but it would not be as detailed may show different trends than a map produced with data at the block level. The original study unit size is based upon the scale of data available, which often determines the unit used. However, we cannot be sure that the results of our analysis wouldn't be different if we used a finer unit of analysis, therefore the unit of aggregation is a threat to validity in this study. Additionally, another threat to this study is the confusion of spatial and a-spatial causation. Flooding is an example of a variable that is often considered to be based exlusivily on the physical geographic of a place. However, this may lead to a lack of focus on variables such as emergency preparedness that may impact the extent of flooding. Another threat to validity is the common assumption that all locations within a delineated region are the same. In the case of the Harvey flooding study we may see that a region that has a predominantly white population has a lot of flooding, but we are not taking into consideration the distribution of population within that area and cannot tell whether the flooding in that region is overlapping with the white population or if there are other factors at play such as flooding in undeveloped wetlands within the region, which would not have a significant human geography impact. Finally, there may be a boundary effect from the border of Harris County. The northwest border of Harris County is a river, thus it follows that the lowland area surrounding it would be more likely to flood. Thus, by not extending the extent of the study, we may see higher flooded percentages in regions that touch this border. 
+
 ### Data transformations
 
 Describe all data transformations planned to prepare data sources for analysis.
@@ -200,19 +144,32 @@ Examples of **variable** transformations include standardization, normalization,
 
 Be sure to include any steps planned to **exclude** observations with *missing* or *outlier* data, to **group** observations by *attribute* or *geographic* criteria, or to **impute** missing data or apply spatial or temporal **interpolation**.
 
+#### Goal 1: Load census data into block groups 
+
+The first step of the workflow is to join blockgroup_demographic_data.csv dataframe data to the blockgroups shapefile by the join field "GEOID." This will create a new shapefile/geodataframe we call bgData.shp that will contain block group geometries and demographic data.
+
+#### Goal 2: Create regions by majority groups
+
+First step of goal 2 is calculate new fields is bgData.shp. These new fields will be pctAsian, pctBlack, pctLatinx, pctWhite. 
+The next step will be to calculate another field named majorGrp which will take the value of the name of a racial group if that group makes up more than 60% of the population of that block group. If no group takes up more than 60% then the block group is labelled as "mixed." Next we will group blocks by majority group and dissolve adjacent block groups of the same majority groups. This will create a new shapefile named major_grps.
+
+#### Goal 3: Find flooded area in each group and calculate pct.
+
+First step of goal 3 is to run a zonal statistic on actual_flood_10.tif and major_grps which will calculate the area of each majority group region that was flooded during the hurricane. This new layer will be named bgMajFlood. We will then calculate new fields in this layer. These fields will be flooded area, total area, and then percentage flood based on the previous two fields. 
+
+
 ### Analysis
 
-Describe the methods of analysis that will directly test the hypotheses or provide results to answer the research questions.
-This section should explicitly define any spatial / statistical *models* and their *parameters*, including *grouping* criteria, *weighting* criteria, and *significance thresholds*.
-Also explain any follow-up analyses or validations.
+We are trying to describe the spatial patterns of environmental justice in Harris County and the main way we will do this is by calculating the percentage flooded in each of the majority group regions. 
 
 ## Results
 
-Describe how results are to be presented.
+We will present our results in table and graph form as well as producing two main maps. One map of the majority racial group regions and actual flooded areas. The second map will show percent flooded by majority group regions. 
+
 
 ## Discussion
 
-Describe how the results are to be interpreted *vis a vis* each hypothesis or research question.
+We will discuss how this study reveals the patterns of environmental justice in Harris County as well as how our use of a reproducible python notebook more easily allows our study to be modified and expanded upon. 
 
 ## Integrity Statement
 
