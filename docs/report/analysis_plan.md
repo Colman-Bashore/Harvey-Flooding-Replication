@@ -11,6 +11,9 @@
 This study is a reproduction of a Middebury Geography Indroductory GIS Lab problem titled "Exposure to Environmental Hazards: Hurricane Harvey." The original study focused on comparing levels of flooding across block groups of different majority demographics. The original study used the desktop GIS QGIS to determine the majority racial group in every block group in Harris County, Texas and then compared these data to the extent of flooding from Hurricane Harvey. This reproduction study aims to reproduce the same results from the original lab problem using a Python computation notebook (ipynb) as opposed to a desktop GIS workflow. The notebook will potentially serve as an opportunity to demonstrate using Python to complete simple GIS problems in the context of an introductory Human Geography with GIS class. 
 
 [Link to original study prompt](https://drive.google.com/file/d/1l_bylAyBrcuvR5PYj_I3jSKbu04dz5Wh/view)
+Workflow Diagram:
+![Workflow Diagram](/docs/report/Workflow.png)
+
 
 ### Study metadata
 
@@ -20,7 +23,7 @@ This study is a reproduction of a Middebury Geography Indroductory GIS Lab probl
 - `Date modified`: December 17, 2023
 - `Spatial Coverage`: Harris County, Texas [OpenStreetMap Link](https://www.openstreetmap.org/relation/1560395)
 - `Spatial Resolution`: Census Block Group Level
-- `Spatial Reference System`: EPSG:4326
+- `Spatial Reference System`: EPSG:6587
 - `Temporal Coverage`: September 2017
 - `Temporal Resolution`: Yearly Census Data
 - `Funding Name`: Middlebury College
@@ -56,43 +59,82 @@ Describe the **data sources** and **variables** to be used.
 Data sources may include plans for observing and recording **primary data** or descriptions of **secondary data**.
 For secondary data sources with numerous variables, the analysis plan authors may focus on documenting only the variables intended for use in the study.
 
-Primary data sources for the study are to include ... .
 Secondary data sources for the study are to include ... .
 
-blockgroups.shp
-◦ Block Groups of Harris County, Texas
-◦ One block group contains only 9 people, but you may include all block groups in your analysis.
-◦ Source: United States Census API https://www.census.gov/developers/ via R tidycensus
-https://walkerke.github.io/tidycensus
+### blockgroups.shp
 
-blockgroup_demographic_data.csv
-◦ Data table of block group demographics.
-◦ Explanation of attribute variable codes from this 5-year American Community Survey 2012-2017 data are found in
-block group metadata.xls
-◦ Source: United States Census API https://www.census.gov/developers/ via Rtidycensus
-https://walkerke.github.io/tidycensus
+- `Title`: blockgroups.shp
+- `Abstract`: Shapefile containing the geometry and GEOID over every Census block group in Harris County, Texas.
+- `Spatial Coverage`: Harris County, Texas. [OpenStreetMap Link](https://www.openstreetmap.org/relation/1560395)
+- `Spatial Resolution`: Census Block Group
+- `Spatial Reference System`: EPSG: 6587
+- `Temporal Coverage`: N/A
+- `Temporal Resolution`: N/A
+- `Lineage`: United States Census Bureau delineation, gathered through US Census API https://www.census.gov/developers/
+- `Distribution`: Distributed publicly indefinetely by the US Census.
+- `Constraints`: None
+- `Data Quality`: Opening in a graphical GIS like QGIS and verifying existence of all block groups.
+- `Variables`: For each variable, enter the following information. If you have two or more variables per data source, you may want to present this information in table form (shown below)
+  - `Label`: GEOID
+  - `Alias`: GEOID
+  - `Definition`: Unique identifier for each block group
+  - `Type`: Integer
+  - `Accuracy`: One per block group.
+  - `Domain`: 482011000001 to 482019801001
+  - `Missing Data Value(s)`: N/A
+  - `Missing Data Frequency`: None for GEOID
 
-predicted_flood.shp
-◦ This vector layer contains FEMA’s 100-yr flood zones for Harris County. A 100-year flood zone indicates a 1%
-chance of flooding every year.
-◦ Source: FEMA’s National Flood Hazard Layer (NFHL) Viewer https://hazards-
-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd
+Other variables are not significant for this analysis
 
-actual_flood.shp
-◦ This vector layer contains FEMA’s 100-yr flood zones for Harris County. A 100-year flood zone indicates a 1%
-chance of flooding every year.
-◦ Source: FEMA’s National Flood Hazard Layer (NFHL) Viewer https://hazards-
-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd
+### blockgroup_demographic_data.csv
+- `Title`: blockgroup_demographic_data.csv
+- `Abstract`: Data table of American Community Survey demographic data by Census Block groups for Harris County, Texas.
+- `Spatial Coverage`: Harris County, Texas. [OpenStreetMap Link](https://www.openstreetmap.org/relation/1560395)
+- `Spatial Resolution`: Census Block Groups
+- `Spatial Reference System`: None
+- `Temporal Coverage`: 2012-2017
+- `Temporal Resolution`: ACS 5-year estimates
+- `Lineage`: https://www.census.gov/programs-surveys/acs/guidance/estimates.html
+- `Distribution`: Distributed publicly indefinetely by the US Census.
+- `Constraints`: None
+- `Data Quality`: None
+- `Variables`: For each variable, enter the following information. If you have two or more variables per data source, you may want to present this information in table form (shown below)
+  - `Label`: variable name as used in the data or code
+  - `Alias`: intuitive natural language name
+  - `Definition`: Short description or definition of the variable. Include measurement units in description.
+  - `Type`: data type, e.g. character string, integer, real
+  - `Accuracy`: e.g. uncertainty of measurements
+  - `Domain`: Expected range of Maximum and Minimum of numerical data, or codes or categories of nominal data, or reference to a standard codebook
+  - `Missing Data Value(s)`: Values used to represent missing data and frequency of missing data observations
+  - `Missing Data Frequency`: Frequency of missing data observations: not yet known for data to be collected
 
-actual_flood_10.tif
-◦ This raster layer contains the value 1 in each cell that was flooded and nodata (raster equivalent of
-NULL) in all other locations.
-◦ The layer's coordinate system units are meters, and the cell size is 10 meters by 10 meters.
-◦ Sources: The Flood Observatory https://floodobservatory.colorado.edu/ and the Harris County Flood
-Control District: https://www.hcfcd.org/Hurricane-Harvey
+| Label | Alias | Definition | Type | Accuracy | Domain | Missing Data Value(s) | Missing Data Frequency |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| GEOID | GEOID | Unique identifier for each block group | Integer | N/A | 482011000001 to 482019801001 | N/A | None |
+| BO3002_001 | Total Population | Number of people in the block group | Integer | See ACS | 9-21758 | N/A | None |
+| BO3002_003 | White Population | Number of people in the White racial/ethnic group in the block group | Integer | See ACS | 0-9199 | N/A | None |
+| BO3002_004 | Black Population | Number of people in the Black racial/ethnic group in the block group | Integer | See ACS | 0-5258  | N/A | None |
+| BO3002_006 | Asian Population | Number of people in the Asian racial/ethnic group in the block group | Integer | See ACS | 0-3418 | N/A | None |
+| BO3002_012 | Latinx Population | Number of people in the Latinx racial/ethnic group in the block group | Integer | See ACS | 0-11408 | N/A | None |
 
 
-Each of the next subsections describes one data source.
+### actual_flood_10.tif
+
+- `Title`: actual_flood_10.tif
+- `Abstract`: Raster image of Harris County where 1's represent flooded area from Hurricane Harvey and and nodata (raster equivalent of NULL) in all other locations
+- `Spatial Coverage`: Harris County, Texas. [OpenStreetMap Link](https://www.openstreetmap.org/relation/1560395)
+- `Spatial Resolution`: 10 meter resolution
+- `Spatial Reference System`: EPSG: 6587
+- `Temporal Coverage`: September 2017
+- `Temporal Resolution`: Worth investigating more, a specific day after the flooding.
+- `Lineage`: I recieved this data from the GEOG 120 professors. The original sources are: The Flood Observatory https://floodobservatory.colorado.edu/ and the Harris County Flood Control District: https://www.hcfcd.org/Hurricane-Harvey. The steps taken from the original source to the version I recieved are unclear.
+- `Distribution`: This exact file may not be publicly available.
+- `Constraints`: Middlebury Course Material
+- `Data Quality`: Inspect in QGIS.
+- `Variables`: Only has one Band. 1 = Flooded. Nodata = Not flooded.
+
+
+
 
 ### Prior observations  
 

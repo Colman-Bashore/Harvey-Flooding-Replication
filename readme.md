@@ -11,30 +11,28 @@ If you use this template for research, please [cite it](template_reference.bib):
 \* Corresponding author and creator
 
 ## Abstract
+This study is a reproduction of a Middebury Geography Indroductory GIS Lab problem titled "Exposure to Environmental Hazards: Hurricane Harvey." The original study focused on comparing levels of flooding across block groups of different majority demographics. The original study used the desktop GIS QGIS to determine the majority racial group in every block group in Harris County, Texas and then compared these data to the extent of flooding from Hurricane Harvey. This reproduction study aims to reproduce the same results from the original lab problem using a Python computation notebook (ipynb) as opposed to a desktop GIS workflow. The notebook will potentially serve as an opportunity to demonstrate using Python to complete simple GIS problems in the context of an introductory Human Geography with GIS class. 
 
-Write a brief abstract about your research project.
-If the project is a reproduction or replication study, include the full citation with a statement
-This study is a *reproduction/replication* of:
+[Link to original study prompt](https://drive.google.com/file/d/1l_bylAyBrcuvR5PYj_I3jSKbu04dz5Wh/view)
+Workflow Diagram:
+![Workflow Diagram](/docs/report/Workflow.png)
 
-> citation to prior study
-
-A graphical abstract of the study could also be included as an image here.
 
 ## Study Metadata
 
 - `Key words`: Comma-separated list of keywords (tags) for searchability. Geographers often use one or two keywords each for: theory, geographic context, and methods.
 - `Subject`: select from the [BePress Taxonomy](http://digitalcommons.bepress.com/cgi/viewcontent.cgi?article=1008&context=reference)
-- `Date created`: date when project was started
-- `Date modified`: date of most recent revision
-- `Spatial Coverage`: Specify the geographic extent of your study. This may be a place name and link to a feature in a gazetteer like GeoNames or OpenStreetMap, or a well known text (WKT) representation of a bounding box.
-- `Spatial Resolution`: Specify the spatial resolution as a scale factor, description of the level of detail of each unit of observation (including administrative level of administrative areas), and/or or distance of a raster GRID size
-- `Spatial Reference System`: Specify the geographic or projected coordinate system for the study
-- `Temporal Coverage`: Specify the temporal extent of your study---i.e. the range of time represented by the data observations.
-- `Temporal Resolution`: Specify the temporal resolution of your study---i.e. the duration of time for which each observation represents or the revisit period for repeated observations
-- `Funding Name`: name of funding for the project
-- `Funding Title`: title of project grant
-- `Award info URI`: web address for award information
-- `Award number`: award number
+- `Date created`: November 23, 2023
+- `Date modified`: December 17, 2023
+- `Spatial Coverage`: Harris County, Texas [OpenStreetMap Link](https://www.openstreetmap.org/relation/1560395)
+- `Spatial Resolution`: Census Block Group Level
+- `Spatial Reference System`: EPSG:6587
+- `Temporal Coverage`: September 2017
+- `Temporal Resolution`: Yearly Census Data
+- `Funding Name`: Middlebury College
+- `Funding Title`: N/A
+- `Award info URI`: N/A
+- `Award number`: N/A
 
 ## Related to
 
