@@ -1,1 +1,6 @@
 path,name,metadata,description
+raw\public,actual_flood_10.tif,actual_flood_10.md,Raster of Hurricane Harvey Flooding
+raw\public,blockgroups.shp,blockgroups.md,Geometry of block groups
+raw\public,blockgroup_demographic_data.csv,blockgroup_demographic_data.md,Demographic Data by block group
+derived\public,major_grps.shp,,
+derived\public,bgMajorFld,,
